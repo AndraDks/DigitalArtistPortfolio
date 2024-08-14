@@ -11,13 +11,19 @@ import { AppService } from './app.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'database123',
-      database: 'postgres',
+      host: 'roundhouse.proxy.rlwy.net',  // Host-ul bazei de date
+      port: 53362,                        // Portul bazei de date
+      username: 'postgres',               // Utilizatorul bazei de date
+      password: 'LRukGBQioqTHezqnzDiuTbqgAxcYgtbY', // Parola bazei de date
+      database: 'railway',                // Numele bazei de date
       entities: [Work],
       synchronize: false,
+      logging: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,  // Dacă baza de date necesită SSL
+        },
+      },
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),

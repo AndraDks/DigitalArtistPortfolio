@@ -4,6 +4,7 @@ import { ProjectCard } from "./ProjectCard";
 import ProjectForm from "./ProjectForm";
 import axios from 'axios';
 import colorSharp2 from "../assets/img/color-sharp2.png";
+import formImg from "../assets/img/project-img.svg";
 
 export const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -71,7 +72,9 @@ export const Projects = () => {
                           id={project.id}
                           title={project.title}
                           description={project.description}
-                          imgUrl={`http://localhost:3000/${project.image_url.replace(/\\/g, '/').replace(/^uploads\//, '')}`}
+                          imgUrl={project.image_url 
+                            ? `http://localhost:3000/${project.image_url.replace(/\\/g, '/').replace(/^uploads\//, '')}` 
+                            : formImg}
                           clientUrl={project.client_url}
                           isVisible={project.is_visible}
                           onVisibilityChange={(updatedProject) => setProjects(
