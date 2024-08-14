@@ -11,8 +11,10 @@ export const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
+  // handle the scroll event, toggle the 'scrolled' state
   useEffect(() => {
     const onScroll = () => {
+      // 'scrolled' state on the scroll position
       if (window.scrollY > 50) {
         setScrolled(true);
       } else {
@@ -25,6 +27,7 @@ export const NavBar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // update the active navigation link
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
   };
@@ -65,13 +68,13 @@ export const NavBar = () => {
           <span className="navbar-text">
             <div className="social-icon">
               <a href="#">
-                <img src={navIcon1} alt="" />
+                <img src={navIcon1} alt="Social Icon 1" />
               </a>
               <a href="#">
-                <img src={navIcon2} alt="" />
+                <img src={navIcon2} alt="Social Icon 2" />
               </a>
               <a href="#">
-                <img src={navIcon3} alt="" />
+                <img src={navIcon3} alt="Social Icon 3" />
               </a>
             </div>
             <button className="vvd" onClick={() => console.log("contact page")}>

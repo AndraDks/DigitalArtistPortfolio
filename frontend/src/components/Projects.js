@@ -9,6 +9,7 @@ import formImg from "../assets/img/project-img.svg";
 export const Projects = () => {
   const [projects, setProjects] = useState([]);
 
+  // fetch projects data from server
   useEffect(() => {
     axios.get('http://localhost:3000/works')
       .then(response => {
@@ -19,10 +20,12 @@ export const Projects = () => {
       });
   }, []);
 
+  // handle  new project
   const handleProjectCreated = (newProject) => {
     setProjects([...projects, newProject]);
   };
 
+  // toggle visibility 
   const toggleVisibility = async (id, currentStatus) => {
     try {
       const response = await axios.patch(`http://localhost:3000/works/${id}`, {
@@ -36,6 +39,7 @@ export const Projects = () => {
     }
   };
 
+  // delete a project
   const deleteProject = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/works/${id}`);

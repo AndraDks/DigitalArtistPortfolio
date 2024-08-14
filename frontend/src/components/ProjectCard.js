@@ -4,6 +4,7 @@ import { Col, Button } from 'react-bootstrap';
 
 export const ProjectCard = ({ id, title, description, imgUrl, clientUrl, isVisible, onVisibilityChange }) => {
 
+  // handle visibility toggle
   const handleVisibilityToggle = () => {
     axios.patch(`http://localhost:3000/works/${id}`, { is_visible: !isVisible })
       .then(response => {
@@ -14,10 +15,10 @@ export const ProjectCard = ({ id, title, description, imgUrl, clientUrl, isVisib
       });
   };
 
-  // Verifică dacă imgUrl este nul și folosește un URL de rezervă dacă este cazul
+  // check if imgUrl is null
   const imageUrl = imgUrl ? `${imgUrl.replace(/\\/g, '/').replace(/^uploads\//, '')}` : "../assets/img/project-img.svg";
 
-  // Asigură-te că clientUrl are schema corectă
+  // ensure clientUrl has the correct schema
   const formattedClientUrl = clientUrl.startsWith('http') ? clientUrl : `http://${clientUrl}`;
 
   return (

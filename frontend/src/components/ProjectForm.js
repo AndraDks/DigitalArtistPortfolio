@@ -9,43 +9,46 @@ const ProjectForm = ({ onProjectCreated }) => {
   const [clientUrl, setClientUrl] = useState('');
   const [message, setMessage] = useState('');
 
+  // handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // create a FormData object 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
     formData.append('client_url', clientUrl);
-    formData.append('is_visible', false); // Setați inițial la false
+    formData.append('is_visible', false); 
     if (image) {
-      formData.append('file', image);
+      formData.append('file', image); 
     }
 
     try {
+      // POST request to save the project
       const response = await axios.post('http://localhost:3000/works', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
+      // Ccallback function with the newly created project data
       onProjectCreated(response.data);
       setMessage('Project saved successfully! 🎉 You can find it in the "Hidden Projects" tab.');
 
-      // Resetează formularul
+      // reset form 
       setTitle('');
       setDescription('');
-      setImage('');
+      setImage(null); 
       setClientUrl('');
 
-      // Ascunde mesajul după 15 secunde
+      // Hide the success message after 15 seconds
       setTimeout(() => {
         setMessage('');
-      }, 15000); // 15000 milisecunde = 15 secunde
+      }, 15000); 
     } catch (error) {
       console.error('Error saving project:', error);
       setMessage('An error occurred while saving the project. Please try again.');
 
-      // Ascunde mesajul de eroare după 15 secunde
       setTimeout(() => {
         setMessage('');
       }, 15000);
@@ -78,7 +81,7 @@ const ProjectForm = ({ onProjectCreated }) => {
             <label>Image:</label>
             <input
               type="file"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => setImage(e.target.files[0])} 
             />
           </div>
           <div className="form-group">
@@ -90,12 +93,12 @@ const ProjectForm = ({ onProjectCreated }) => {
               placeholder="Enter client URL"
             />
           </div>
-            {message && <div className="message">{message}</div>}
+          {message && <div className="message">{message}</div>}
           <button type="submit">Save Project</button>
         </form>
       </div>
       <div className="form-image">
-        <img src={formImg} alt="Add Project" />
+        <img src={formImg} alt="Add Project" /> 
       </div>
     </div>
   );
